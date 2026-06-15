@@ -652,9 +652,17 @@
   <script>
     (function() {
       // ----- preloader -----
+      // Hide preloader on load
       window.addEventListener('load', () => {
         document.getElementById('preloader').classList.add('hidden');
       });
+      // Fallback: hide preloader after 5 seconds even if load event hasn't fired
+      setTimeout(() => {
+        const pl = document.getElementById('preloader');
+        if (pl && !pl.classList.contains('hidden')) {
+          pl.classList.add('hidden');
+        }
+      }, 5000);
 
       // ----- COUNTDOWN (June 11, 2026) -----
       function updateCountdown() {
@@ -796,6 +804,7 @@ const newsArticles = [
   { gradient: 'linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)', date: 'May 16, 2026', title: 'Ticket Sales Break All Previous Records', excerpt: 'Over 3 million tickets sold within first 24 hours of public sale.' }
 ];
 
+const newsGrid = document.getElementById('newsGrid');
 newsArticles.forEach(article => {
   const card = document.createElement('div');
   card.className = 'news-card fade-in';
@@ -824,6 +833,7 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
 // Ticket form handler
+const ticketForm = document.getElementById('ticketForm');
 ticketForm.addEventListener('submit', function(e) {
   e.preventDefault();
   alert('Thank you for your registration! We will contact you with ticket availability.');
