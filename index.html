@@ -41,44 +41,6 @@
       overflow-x: hidden;
     }
 
-    /* ---------- PRELOADER ---------- */
-    #preloader {
-      position: fixed;
-      inset: 0;
-      z-index: 99999;
-      background: var(--dark-bg);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.6s ease, visibility 0.6s;
-    }
-    #preloader.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-    .loader-ring {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      border: 6px solid rgba(242,169,0,0.15);
-      border-top: 6px solid var(--gold);
-      border-right: 6px solid var(--green);
-      border-bottom: 6px solid var(--blue);
-      animation: spin 1.2s cubic-bezier(0.6, 0, 0.4, 1) infinite;
-      margin-bottom: 24px;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .preloader-text {
-      font-family: var(--font-secondary);
-      font-weight: 700;
-      font-size: 1.4rem;
-      letter-spacing: 4px;
-      background: linear-gradient(135deg, var(--gold), var(--green), var(--blue));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
 
     /* ---------- NAVIGATION ---------- */
     nav {
@@ -555,11 +517,6 @@
   </style>
 </head>
 <body>
-  <!-- PRELOADER -->
-  <div id="preloader">
-    <div class="loader-ring"></div>
-    <div class="preloader-text">FIFA 2026</div>
-  </div>
 
   <!-- NAVIGATION -->
   <nav>
@@ -651,19 +608,6 @@
 
   <script>
     (function() {
-      // ----- preloader -----
-      // Hide preloader on load
-      window.addEventListener('load', () => {
-        document.getElementById('preloader').classList.add('hidden');
-      });
-      // Fallback: hide preloader after 5 seconds even if load event hasn't fired
-      setTimeout(() => {
-        const pl = document.getElementById('preloader');
-        if (pl && !pl.classList.contains('hidden')) {
-          pl.classList.add('hidden');
-        }
-      }, 5000);
-
       // ----- COUNTDOWN (June 11, 2026) -----
       function updateCountdown() {
         const target = new Date('2026-06-11T00:00:00').getTime();
